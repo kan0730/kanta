@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<a href="/home">アプリ説明</a>
+<h1>食事記録</h1>
+
+<form  action="/result" method="post">
+        <label for="morning">朝ごはん</label>
+        <input type="text" name="morning">
+        
+        <label for="lunch">昼ごはん</label>
+        <input type="text" name="lunch">
+        
+        <label for="dinner">夜ごはん</label>
+        <input type="text" name="dinner">
+        <label for="calori">1日のカロリー</label>
+  <select class="my-select" name="calori" id="calori">
+        <option value="1000">1000</option>
+        <option value="1500">1500</option>
+        <option value="2000">2000</option>
+        <option value="2500">2500</option>
+        <option value="3000">3000</option>
+        <option value="3500">3500</option>
+        <option value="4000">4000</option>
+  </select>
+        
+        <label for="day">日付</label>
+        <input type="date" name="day">
+
+        <button type="submit">送信する</button>
+</form>
+
+
+<h2>投稿一覧</h2>
+
+  <table border="1">
+    <tr><th>朝ごはん</th><th>昼ごはん</th><th>夜ごはん</th><th>総カロリー</th><th>日付</th></tr>
+      {% for line in lines: %}
+        {% set column = line.rstrip().split(",") %}
+        <tr>
+          {% for item in column: %}
+            <td>{{ item }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+  </table>
+{% endblock %}
